@@ -19,7 +19,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return Transaction::all();
+        return Transaction::with('owner')
+            ->whereBetween('transaction_date', [request('from'), request('to')])
+            ->get();
     }
 
     /**
