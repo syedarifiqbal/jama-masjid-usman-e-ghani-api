@@ -20,10 +20,10 @@ class TransactionController extends Controller
     public function index()
     {
         return Transaction::with('owner')
-            ->whereBetween('transaction_date', [
-                request('from', now()->subDay(30)->toDateString()), 
-                request('to', now()->toDateString())
-            ])
+            // ->whereBetween('transaction_date', [
+            //     request('from', now()->subDay(30)->toDateString()), 
+            //     request('to', now()->toDateString())
+            // ])
             ->get();
     }
 
