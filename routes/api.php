@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth:api'], function($router) {
     Route::apiResource('announcements', AnnouncementController::class);
     
     // Routes for transaction types
-    // Route::apiResource('transaction-types', TransactionTypeController::class);
+    Route::apiResource('transaction-types', TransactionTypeController::class);
     
     // Routes for settings
     // Route::apiResource('settings', SettingController::class);
