@@ -10,4 +10,6 @@ class TransactionType extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description', 'active'];
+ 
+    protected $casts = ['active' => 'boolean'];
 }

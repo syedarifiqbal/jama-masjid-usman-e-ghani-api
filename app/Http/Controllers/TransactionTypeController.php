@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TransactionType;
 use Illuminate\Http\Request;
 
 class TransactionTypeController extends Controller
@@ -13,7 +14,7 @@ class TransactionTypeController extends Controller
      */
     public function index()
     {
-        //
+        return TransactionType::all();
     }
 
     /**
@@ -24,7 +25,7 @@ class TransactionTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
