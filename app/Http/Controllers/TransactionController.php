@@ -19,8 +19,8 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        return Transaction::with('owner:id,name')
-            ->with('approver:id,name')
+        return Transaction::with('owner:id,name,email,is_admin')
+            ->with('approver:id,name,email,is_admin')
             ->when($request->from && $request->to, function ($q) use ($request) {
                 $q->whereBetween('transaction_date', [$request->from, $request->to]);
             })
