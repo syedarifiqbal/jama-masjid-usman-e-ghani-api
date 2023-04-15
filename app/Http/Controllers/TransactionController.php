@@ -17,13 +17,22 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Transaction::with('owner')
-            // ->whereBetween('transaction_date', [
-            //     request('from', now()->subDay(30)->toDateString()), 
-            //     request('to', now()->toDateString())
-            // ])
+        return Transaction::with('owner:id,name')
+            ->with('approver:id,name')
+            ->when($request->from && $request->to, function ($q) use ($request) {
+                $q->whereBetween('transaction_date', [$request->from, $request->to]);
+            })
+            ->when($request->type, function ($q) use ($request) {
+                $q->where('transaction_type_id', $request->type);
+            })
+            ->when(!$request->from && !$request->to, function ($q) use ($request) {
+                $q->whereBetween('transaction_date', [
+                    request('from', now()->subDay(30)->toDateString()),
+                    request('to', now()->toDateString())
+                ]);
+            })
             ->get();
     }
 
