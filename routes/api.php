@@ -33,7 +33,7 @@ Route::group(['middleware' => 'api'], function($router) {
 
 Route::group(['middleware' => 'auth:api'], function($router) {
     // Routes for transactions
-    // Route::put('transactions/{transaction}/approve', [TransactionController::class, 'approve']);
+    Route::put('transactions/{transaction}/approve', [TransactionController::class, 'approve']);
     Route::apiResource('transactions', TransactionController::class);
     
     // Routes for categories
