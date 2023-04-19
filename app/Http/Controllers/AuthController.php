@@ -73,8 +73,7 @@ class AuthController extends Controller
         }
 
         if(request('fcm_token')) {
-            $id = auth()->id();
-            User::find($id)->update(['fcm_token', request('fcm_token')]);
+            User::where('email', $request->get('email'))->update(['fcm_token', request('fcm_token')]);
         }
 
         return $this->respondWithToken($token, User::query()->where('email', $request->get('email'))->first());
