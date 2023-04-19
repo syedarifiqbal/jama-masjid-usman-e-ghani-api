@@ -72,6 +72,11 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        if(request('fcm_token')) {
+            $id = auth()->id();
+            User::find($id)->update(['fcm_token', require('fcm_token')]);
+        }
+
         return $this->respondWithToken($token, User::query()->where('email', $request->get('email'))->first());
     }
 
