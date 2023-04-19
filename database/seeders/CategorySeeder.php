@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::truncate();
-        collect(['Income', 'Expense'])->each(function ($title) {
+        collect(['General (Masjid)', 'Madarasa', 'Fitra', 'Zakat', 'Sadqa'])->each(function ($title) {
             Category::create(['name' => $title]);
         });
     }
