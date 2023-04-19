@@ -136,7 +136,7 @@ class TransactionController extends Controller
         $fcmNotifier = new FCMNotifier();
         $deviceTokens = [$transaction->owner->fcm_token];
         $title = "Transaction Approved By: " . auth()->user()->name;
-        $body = "Amount: {$transaction->amount} \\nDescription: {$transaction->description}";
+        $body = "Amount: {$transaction->amount} \nDescription: {$transaction->description}";
         $data = ['transaction_id' => $transaction->id];
         $fcmNotifier->notify($deviceTokens, $title, $body, $data);
 
