@@ -108,6 +108,20 @@ class AuthController extends Controller
     }
 
     /**
+     * Update FCM Token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateFcmToken(Request $request)
+    {
+        User::where('id', auth()->id())
+        ->update([
+            'fcm_token' => $request->token,
+        ]);
+        return response()->json(['message' => 'Success']);
+    }
+
+    /**
      * Get the token array structure.
      *
      * @param  string $token

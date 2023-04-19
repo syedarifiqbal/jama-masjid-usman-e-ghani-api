@@ -26,13 +26,14 @@ Route::group(['middleware' => 'api'], function($router) {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/profile', [AuthController::class, 'profile']);
+    Route::put('/fcm-token-update', [AuthController::class, 'updateFcmToken']);
     Route::post('/forget-password', [AuthController::class, 'forgotPassword']);
     Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 });
 
 Route::group(['middleware' => 'auth:api'], function($router) {
     // Routes for transactions
-    Route::put('transactions/{transaction}/approve', [TransactionController::class, 'approve']);
+    // Route::put('transactions/{transaction}/approve', [TransactionController::class, 'approve']);
     Route::apiResource('transactions', TransactionController::class);
     
     // Routes for categories
