@@ -23,7 +23,7 @@ class TransactionController extends Controller
     {
         return Transaction::with('owner:id,name,email,is_admin')
             ->with('approver:id,name,email,is_admin')
-            ->with('category:id,name')
+            ->with('category:id,name,active')
             ->with('type:id,name,active')
             ->when($request->from && $request->to, function ($q) use ($request) {
                 $q->whereBetween('transaction_date', [$request->from, $request->to]);
