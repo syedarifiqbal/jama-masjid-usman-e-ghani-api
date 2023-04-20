@@ -147,11 +147,20 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Transaction $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+
+        $fcmNotifier = new FCMNotifier();
+        $deviceTokens = [$transaction->owner->fcm_token];
+        $title = "Transaction has been deleted, By: " . auth()->user()->name;
+        $body = "Amount: {$transaction->amount} \nDescription: {$transaction->description}";
+        $data = ['transaction_id' => $transaction->id];
+        $fcmNotifier->notify($deviceTokens, $title, $body, $data);
+
+        return response()->json(['message' => 'Transaction has been deleted!'], Response::HTTP_OK);
     }
 }
